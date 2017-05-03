@@ -1,13 +1,12 @@
-from OpenGL import GL as gl
-from OpenGL.GLUT import *
+from OpenGL import GL as gl, GLUT as glut
 # from OpenGL.GLU import *
 import numpy as np
 
 from ant import Ant
 
 window = 0  # glut window number
-tile_size = 25
-tile_grid = 30  # grid is a square: tile_grid x tile_grid
+tile_size = 15
+tile_grid = 50  # grid is a square: tile_grid x tile_grid
 tile_spacing = 1
 width = (tile_size * tile_grid) + (tile_spacing * tile_grid) + 1
 height = (tile_size * tile_grid) + (tile_spacing * tile_grid) + 1
@@ -37,12 +36,9 @@ def refresh2d(w, h):
 def update_ant():
     global ant
     if 0 <= ant.x < tile_grid and 0 <= ant.y < tile_grid:
-        try:
-            curr_tile = tiles[ant.x][ant.y]
-            next_color = ant.next_step(curr_tile.get('color', -1))
-            curr_tile['color'] = next_color
-        except:
-            pass
+        curr_tile = tiles[ant.x][ant.y]
+        next_color = ant.next_step(curr_tile.get('color', -1))
+        curr_tile['color'] = next_color
     else:
         pass
 
@@ -83,18 +79,18 @@ def draw():  # draw is called all the time
     draw_board()
     update_ant()
 
-    glutSwapBuffers()  # important for double buffering
+    glut.glutSwapBuffers()  # important for double buffering
 
 
 # initialization
-glutInit()  # initialize glut
-glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
-glutInitWindowSize(width, height)  # set window size
-glutInitWindowPosition(0, 0)  # set window position
-window = glutCreateWindow(title=b'Ant')  # create window with title
-glutDisplayFunc(draw)  # set draw function callback
-glutIdleFunc(draw)  # draw all the time
+glut.glutInit()  # initialize glut
+glut.glutInitDisplayMode(glut.GLUT_RGBA | glut.GLUT_DOUBLE | glut.GLUT_ALPHA | glut.GLUT_DEPTH)
+glut.glutInitWindowSize(width, height)  # set window size
+glut.glutInitWindowPosition(0, 0)  # set window position
+window = glut.glutCreateWindow(title=b'Ant')  # create window with title
+glut.glutDisplayFunc(draw)  # set draw function callback
+glut.glutIdleFunc(draw)  # draw all the time
 
 build_board()
 
-glutMainLoop()  # start everything
+glut.glutMainLoop()  # start everything
