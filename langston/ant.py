@@ -1,6 +1,8 @@
+
+
 class Ant(object):
 
-    code = {"white": ("black", "left"),
+    rules = {"white": ("black", "left"),
             "black": ("white", "right")}
 
     def __init__(self, x, y, color, direction):
@@ -14,7 +16,7 @@ class Ant(object):
         :param col: The color of the tile the Ant is on
         :return: self.color, the color to change the last tile to
         """
-        instruction = self.code[col]
+        instruction = self.rules[col]
         self.color = instruction[0]
         turn = instruction[1]
         if self.direction == 'N' and turn == 'left':
