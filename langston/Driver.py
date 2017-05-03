@@ -1,12 +1,12 @@
-from OpenGL import GL as gl, GLUT as glut
 # from OpenGL.GLU import *
 import numpy as np
+from OpenGL import GL as gl, GLUT as glut
 
-from ant import Ant
+from langston.ant import Ant
 
 window = 0  # glut window number
-tile_size = 15
-tile_grid = 50  # grid is a square: tile_grid x tile_grid
+tile_size = 10
+tile_grid = 70  # grid is a square: tile_grid x tile_grid
 tile_spacing = 1
 width = (tile_size * tile_grid) + (tile_spacing * tile_grid) + 1
 height = (tile_size * tile_grid) + (tile_spacing * tile_grid) + 1
@@ -34,7 +34,7 @@ def refresh2d(w, h):
 
 
 def update_ant():
-    global ant
+    global ant, tiles
     if 0 <= ant.x < tile_grid and 0 <= ant.y < tile_grid:
         curr_tile = tiles[ant.x][ant.y]
         next_color = ant.next_step(curr_tile.get('color', -1))
@@ -44,6 +44,7 @@ def update_ant():
 
 
 def build_board():
+    global tiles
     gl.glColor3f(1.0, 1.0, 1.0)  # set color to white
     for i in range(tile_grid):
         for j in range(tile_grid):
@@ -58,6 +59,7 @@ def build_board():
 
 
 def draw_board():
+    global tiles
     for i in range(tile_grid):
         for j in range(tile_grid):
             curr_tile = tiles[i][j]
@@ -90,7 +92,6 @@ glut.glutInitWindowPosition(0, 0)  # set window position
 window = glut.glutCreateWindow(title=b'Ant')  # create window with title
 glut.glutDisplayFunc(draw)  # set draw function callback
 glut.glutIdleFunc(draw)  # draw all the time
-
 build_board()
 
 glut.glutMainLoop()  # start everything
