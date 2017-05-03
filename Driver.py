@@ -1,4 +1,4 @@
-from OpenGL.GL import *
+from OpenGL import GL as gl
 from OpenGL.GLUT import *
 # from OpenGL.GLU import *
 import numpy as np
@@ -17,21 +17,21 @@ ant = Ant(int(np.floor(tile_grid / 2)), int(np.floor(tile_grid / 2)), 'white', '
 
 
 def draw_rect(x, y, w, h):
-    glBegin(GL_QUADS)  # start drawing a rectangle
-    glVertex2f(x, y)  # bottom left point
-    glVertex2f(x + w, y)  # bottom right point
-    glVertex2f(x + w, y + h)  # top right point
-    glVertex2f(x, y + h)  # top left point
-    glEnd()  # done drawing a rectangle
+    gl.glBegin(gl.GL_QUADS)  # start drawing a rectangle
+    gl.glVertex2f(x, y)  # bottom left point
+    gl.glVertex2f(x + w, y)  # bottom right point
+    gl.glVertex2f(x + w, y + h)  # top right point
+    gl.glVertex2f(x, y + h)  # top left point
+    gl.glEnd()  # done drawing a rectangle
 
 
 def refresh2d(w, h):
-    glViewport(0, 0, width, height)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(0.0, w, 0.0, h, 0.0, 1.0)
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
+    gl.glViewport(0, 0, width, height)
+    gl.glMatrixMode(gl.GL_PROJECTION)
+    gl.glLoadIdentity()
+    gl.glOrtho(0.0, w, 0.0, h, 0.0, 1.0)
+    gl.glMatrixMode(gl.GL_MODELVIEW)
+    gl.glLoadIdentity()
 
 
 def update_ant():
@@ -40,14 +40,6 @@ def update_ant():
         try:
             curr_tile = tiles[ant.x][ant.y]
             next_color = ant.next_step(curr_tile.get('color', -1))
-            if next_color == 'white':
-                glColor3f(1.0, 1.0, 1.0)  # set color to white
-            elif next_color == 'black':
-                glColor3f(0.0, 0.0, 0.0)  # set color to black
-            # draw_rect(curr_tile.get('x', -1),
-            #           curr_tile.get('y', -1),
-            #           tile_size,
-            #           tile_size)
             curr_tile['color'] = next_color
         except:
             pass
@@ -56,7 +48,7 @@ def update_ant():
 
 
 def build_board():
-    glColor3f(1.0, 1.0, 1.0)  # set color to white
+    gl.glColor3f(1.0, 1.0, 1.0)  # set color to white
     for i in range(tile_grid):
         for j in range(tile_grid):
             tile = (i * tile_size, j * tile_size)
@@ -74,9 +66,9 @@ def draw_board():
         for j in range(tile_grid):
             curr_tile = tiles[i][j]
             if curr_tile['color'] == 'white':
-                glColor3f(1.0, 1.0, 1.0)  # set color to white
+                gl.glColor3f(1.0, 1.0, 1.0)  # set color to white
             elif curr_tile['color'] == 'black':
-                glColor3f(0.0, 0.0, 0.0)  # set color to black
+                gl.glColor3f(0.0, 0.0, 0.0)  # set color to black
             draw_rect(curr_tile.get('x', -1),
                       curr_tile.get('y', -1),
                       tile_size,
@@ -84,8 +76,8 @@ def draw_board():
 
 
 def draw():  # draw is called all the time
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
-    glLoadIdentity()  # reset position
+    gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)  # clear the screen
+    gl.glLoadIdentity()  # reset position
     refresh2d(width, height)  # set mode to 2d
 
     draw_board()
