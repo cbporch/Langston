@@ -12,17 +12,17 @@ tile_spacing = 1
 width = (tile_size * tile_grid) + (tile_spacing * tile_grid) + 1
 height = (tile_size * tile_grid) + (tile_spacing * tile_grid) + 1
 
-tiles = [[0 for x in range(tile_grid)]for y in range(tile_grid)]
-ant = Ant(int(np.floor(tile_grid/2)), int(np.floor(tile_grid/2)), 'white', 'N')
+tiles = [[0 for x in range(tile_grid)] for y in range(tile_grid)]
+ant = Ant(int(np.floor(tile_grid / 2)), int(np.floor(tile_grid / 2)), 'white', 'N')
 
 
 def draw_rect(x, y, w, h):
-    glBegin(GL_QUADS)                                  # start drawing a rectangle
-    glVertex2f(x, y)                                   # bottom left point
-    glVertex2f(x + w, y)                           # bottom right point
-    glVertex2f(x + w, y + h)                  # top right point
-    glVertex2f(x, y + h)                          # top left point
-    glEnd()                             # done drawing a rectangle
+    glBegin(GL_QUADS)  # start drawing a rectangle
+    glVertex2f(x, y)  # bottom left point
+    glVertex2f(x + w, y)  # bottom right point
+    glVertex2f(x + w, y + h)  # top right point
+    glVertex2f(x, y + h)  # top left point
+    glEnd()  # done drawing a rectangle
 
 
 def refresh2d(w, h):
@@ -30,7 +30,7 @@ def refresh2d(w, h):
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glOrtho(0.0, w, 0.0, h, 0.0, 1.0)
-    glMatrixMode (GL_MODELVIEW)
+    glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
 
@@ -86,7 +86,7 @@ def draw_board():
 def draw():  # ondraw is called all the time
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
-    refresh2d(width, height)    # set mode to 2d
+    refresh2d(width, height)  # set mode to 2d
 
     draw_board()
     update_ant()
