@@ -4,7 +4,7 @@ from OpenGL import GL as gl, GLUT as glut
 
 from langston.ant import Ant
 
-window = 0  # glut window number
+# window = 0  # glut window number
 tile_size = 10
 tile_grid = 70  # grid is a square: tile_grid x tile_grid
 tile_spacing = 1
