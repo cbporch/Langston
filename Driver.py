@@ -44,10 +44,10 @@ def update_ant():
                 glColor3f(1.0, 1.0, 1.0)  # set color to white
             elif next_color == 'black':
                 glColor3f(0.0, 0.0, 0.0)  # set color to black
-            draw_rect(curr_tile.get('x', -1),
-                      curr_tile.get('y', -1),
-                      tile_size,
-                      tile_size)
+            # draw_rect(curr_tile.get('x', -1),
+            #           curr_tile.get('y', -1),
+            #           tile_size,
+            #           tile_size)
             curr_tile['color'] = next_color
         except:
             pass
@@ -83,7 +83,7 @@ def draw_board():
                       tile_size)
 
 
-def draw():  # ondraw is called all the time
+def draw():  # draw is called all the time
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
     refresh2d(width, height)  # set mode to 2d
