@@ -2,8 +2,8 @@
 
 class Ant(object):
 
-    rules = {"white": ("black", "left"),
-            "black": ("white", "right")}
+    rules = {"white": ("black", "right"),
+            "black": ("white", "left")}
 
     def __init__(self, x, y, color, direction):
         self.x, self.y = x, y
